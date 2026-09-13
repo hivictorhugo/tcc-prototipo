@@ -1,19 +1,20 @@
 import requests
 import re
 
+
 def gerar_consulta(pergunta):
 
     pergunta = pergunta.lower()
 
+    # Mais de X anos
+    
     correspondencia_maior = re.search(r"mais\s+de\s+(\d+)", pergunta)
-
-    correspondencia_idade = re.search(r"(\d+)\s+anos", pergunta)
 
     if correspondencia_maior:
 
-        idade_minima = correspondencia_maior.group(1)
+        idade = correspondencia_maior.group(1)
 
-        consulta = f"""
+        return f"""
         PREFIX ex: <http://example.com/base/>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
@@ -22,17 +23,42 @@ def gerar_consulta(pergunta):
             ?pessoa a ex:Pessoa ;
                     ex:nome ?nome ;
                     ex:idade ?idade .
-            FILTER(xsd:integer(STR(?idade)) > {idade_minima})
+            FILTER(xsd:integer(STR(?idade)) > {idade})
         }}
         """
 
-        return consulta
 
-    elif correspondencia_idade:
+    # Menos de X anos
+    
+    correspondencia_menor = re.search(r"menos\s+de\s+(\d+)", pergunta)
+
+    if correspondencia_menor:
+
+        idade = correspondencia_menor.group(1)
+
+        return f"""
+        PREFIX ex: <http://example.com/base/>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+        SELECT ?nome ?idade
+        WHERE {{
+            ?pessoa a ex:Pessoa ;
+                    ex:nome ?nome ;
+                    ex:idade ?idade .
+            FILTER(xsd:integer(STR(?idade)) < {idade})
+        }}
+        """
+
+
+    # Idade exata
+    
+    correspondencia_idade = re.search(r"(\d+)\s+anos", pergunta)
+
+    if correspondencia_idade:
 
         idade = correspondencia_idade.group(1)
 
-        consulta = f"""
+        return f"""
         PREFIX ex: <http://example.com/base/>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
@@ -45,7 +71,43 @@ def gerar_consulta(pergunta):
         }}
         """
 
-        return consulta
+
+    # Idade de uma pessoa
+    
+    nomes = ["joão", "maria", "pedro"]
+
+    for nome in nomes:
+
+        if nome in pergunta:
+
+            return f"""
+            PREFIX ex: <http://example.com/base/>
+
+            SELECT ?nome ?idade
+            WHERE {{
+                ?pessoa a ex:Pessoa ;
+                        ex:nome ?nome ;
+                        ex:idade ?idade .
+                FILTER(?nome = "{nome.capitalize()}")
+            }}
+            """
+
+
+    # Listar todas as pessoas
+    
+    if "todas as pessoas" in pergunta or "liste as pessoas" in pergunta:
+
+        return """
+        PREFIX ex: <http://example.com/base/>
+
+        SELECT ?nome ?idade
+        WHERE {
+            ?pessoa a ex:Pessoa ;
+                    ex:nome ?nome ;
+                    ex:idade ?idade .
+        }
+        """
+
 
     return None
 
@@ -86,5 +148,5 @@ if resultados:
         print(f"Resposta: {nome} tem {idade} anos.")
 
 else:
+
     print("Nenhuma pessoa encontrada.")
-    
