@@ -1,0 +1,17 @@
+﻿@base <http://example.com/base/> .
+@prefix pessoa: <http://example.com/base/pessoa/> .
+@prefix ex: <http://example.com/base/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+pessoa:1 a ex:Pessoa;
+  ex:nome "João";
+  ex:idade "25"^^<xsd:integer> .
+
+pessoa:2 a ex:Pessoa;
+  ex:nome "Maria";
+  ex:idade "30"^^<xsd:integer> .
+
+pessoa:3 a ex:Pessoa;
+  ex:nome "Pedro";
+  ex:idade "22"^^<xsd:integer> .

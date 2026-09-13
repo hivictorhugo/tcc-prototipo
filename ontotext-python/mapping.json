@@ -1,0 +1,120 @@
+{
+  "baseIRI": "http://example.com/base/",
+  "namespaces": {
+    "pessoa": "http://example.com/base/pessoa/",
+    "ex": "http://example.com/base/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "subjectMappings": [
+    {
+      "propertyMappings": [],
+      "subject": {
+        "transformation": {
+          "expression": "pessoa",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "id",
+          "source": "column"
+        }
+      },
+      "typeMappings": [
+        {
+          "transformation": {
+            "language": "raw"
+          },
+          "valueSource": {
+            "source": "constant",
+            "constant": "http://example.com/base/Pessoa"
+          }
+        }
+      ]
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "ex",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "nome"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "nome",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "literal"
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "pessoa",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "id",
+          "source": "column"
+        }
+      },
+      "typeMappings": []
+    },
+    {
+      "propertyMappings": [
+        {
+          "property": {
+            "transformation": {
+              "expression": "ex",
+              "language": "prefix"
+            },
+            "valueSource": {
+              "source": "constant",
+              "constant": "idade"
+            }
+          },
+          "values": [
+            {
+              "valueSource": {
+                "columnName": "idade",
+                "source": "column"
+              },
+              "valueType": {
+                "type": "datatype_literal",
+                "datatype": {
+                  "transformation": {
+                    "language": "raw"
+                  },
+                  "valueSource": {
+                    "source": "constant",
+                    "constant": "xsd:integer"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "subject": {
+        "transformation": {
+          "expression": "pessoa",
+          "language": "prefix"
+        },
+        "valueSource": {
+          "columnName": "id",
+          "source": "column"
+        }
+      },
+      "typeMappings": []
+    }
+  ]
+}
