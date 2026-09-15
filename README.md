@@ -1,4 +1,4 @@
-Sobre o projeto
+*Sobre o projeto*
 
 Protótipo de Grafo de Conhecimento automatizado com Python, Ontotext Refine e GraphDB.
 
@@ -6,17 +6,17 @@ O sistema realiza:
 
 CSV → Python → Ontotext Refine → RDF/Turtle → GraphDB → SPARQL
 
-Também existe um sistema inicial que permite fazer perguntas em linguagem natural:
+*Principais arquivos*
 
-Pergunta → Python → SPARQL → GraphDB → Resultado
-Principais arquivos
 automacao.py — automatiza a criação do projeto no Ontotext Refine, geração do RDF e inserção no GraphDB.
 pergunta.py — recebe perguntas em linguagem natural e gera consultas SPARQL.
 consulta.py — testa consultas SPARQL diretamente.
 mapping.json — define o mapeamento dos dados para RDF.
 resultado.ttl — RDF gerado automaticamente.
 pessoas - Página1.csv — dados utilizados no protótipo.
-Como executar
+
+*Como executar*
+
 1. Inicie
 Ontotext Refine em http://localhost:7333
 GraphDB em http://localhost:7200
@@ -48,6 +48,7 @@ quantos anos tem maria?
 quem tem mais de 20 anos?
 quem tem menos de 30 anos?
 liste todas as pessoas
+
 Funcionamento atual
 
 O pergunta.py ainda utiliza regras fixas em Python para interpretar as perguntas.
