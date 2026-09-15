@@ -9,10 +9,15 @@ CSV → Python → Ontotext Refine → RDF/Turtle → GraphDB → SPARQL
 *Principais arquivos*
 
 automacao.py — automatiza a criação do projeto no Ontotext Refine, geração do RDF e inserção no GraphDB.
+
 pergunta.py — recebe perguntas em linguagem natural e gera consultas SPARQL.
+
 consulta.py — testa consultas SPARQL diretamente.
+
 mapping.json — define o mapeamento dos dados para RDF.
+
 resultado.ttl — RDF gerado automaticamente.
+
 pessoas - Página1.csv — dados utilizados no protótipo.
 
 *Como executar*
